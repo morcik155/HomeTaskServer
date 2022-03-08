@@ -1,0 +1,36 @@
+.input_form {
+    font-family: 'ubuntu', sans-serif;
+    position: relative;
+    left: 40%;
+    width: 20%;
+}
+
+.input_f {
+    position: absolute;
+    left: 15%;
+}
+
+.button {
+    font-family: 'ubuntu', sans-serif;
+    left: 40%;
+    width: 20%;
+}
+
+.table {
+    border-color: #454545;
+    color: #292929;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    width: 20%;
+    height: 25px;
+    text-align: center;
+}
+
+@font-face {
+    font-family: "ubuntu";
+    src: url("fonts") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}

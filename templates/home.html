@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Таблица</title>
+</head>
+<body>
+<form action="/edit" target="_blank">
+    <button>Внести данные</button>
+</form>
+<table class="table" border="2">
+    <tr>
+        <th>предмет</th>
+        <th>домашнее задание</th>
+    </tr>
+</table>
+<h6></h6>
+{%for i in index%}
+<table class="table" border="1">
+    <tr>
+        <th>{{date[i]}}</th>
+    </tr>
+</table>
+<table class="table" border="1">
+    {%for j in index2%}
+    <tr>
+        <th>{{subject[j]}}</th>
+        <th>{{dz[j]}}</th>
+    </tr>
+    {%endfor%}
+</table>
+<h4></h4>
+{%endfor%}
+</body>
+</html>
