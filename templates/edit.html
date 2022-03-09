@@ -8,17 +8,35 @@
 <body>
 <h3>Внесение Домашнего Задания</h3>
 <script src="/static/js/uniqe_index.js"></script>
-{%for i in index%}
-{{rasp[i]}}:
+<!--{%for i in index%}-->
+<!--{{rasp[i]}}:-->
+<!--<form method="POST">-->
+<!--    <input name="w" type="text" id="in_dz">-->
+<!--    <script>-->
+<!--        inp()-->
+<!--    </script>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    {%endfor%}-->
+<!--    <input class="button" type="submit" value="Отправить">-->
+<!--</form>-->
 <form method="POST">
-    <input name="w" type="text" id="in_dz">
-    <script>
-        inp()
-    </script>
-    <br>
-    <br>
-    {%endfor%}
-    <input class="button" type="submit" value="Отправить">
+    <table class="table_table" border="1">
+        {%for i in index%}
+            <tr>
+                <th>
+                    {{rasp[i]}}
+                </th>
+                <th>
+                    <input class="input_table" name="sdds" type="text" id="in_dz">
+                    <script>
+                        inp()
+                    </script>
+                </th>
+            </tr>
+        {%endfor%}
+    </table>
+    <input class="button" type="submit" value="отправить">
 </form>
 </body>
 </html>

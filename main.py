@@ -91,6 +91,7 @@ def edit():
                 data.append(d3 + ' ' + 'ДЕКАБРЯ')
             data.append(n)
             data.append(raspi.d1[d - 1][i - 1])
+            data.append(session.get('user'))
             print(data)
             database.add('HomeTasks', data)
         return redirect('/')
@@ -98,6 +99,15 @@ def edit():
         if session.get('is_active'):
             if d != 7:
                 return render_template('edit.html', rasp=raspi.d1[d - 1], index=range(len(raspi.d1[d - 1])))
+
+
+@app.route('/resetpassword')
+def reset():
+    if request.method == "POST":
+        np = request.form.get('new_password')
+        database.edit('accounts', session.get('user'), np)
+    else:
+        return render_template('reset.html')
 
 
 if __name__ == '__main__':

@@ -5,7 +5,6 @@ def create_table_accounts():
     try:
         sqlite_connection = sqlite3.connect('static/data/Server_data.db')
         sqlite_create_table_query = '''CREATE TABLE accounts (
-                                        id INTEGER PRIMARY KEY,
                                         name TEXT NOT NULL,
                                         password TEXT NOT NULL);'''
         cursor = sqlite_connection.cursor()
@@ -29,7 +28,8 @@ def create_table_HomeTasks():
                                         id INTEGER PRIMARY KEY,
                                         date TEXT NOT NULL,
                                         text TEXT NOT NULL,
-                                        sub TEXT NOT NULL);'''
+                                        sub TEXT NOT NULL,
+                                        who_reduct TEXT NOT NULL);'''
         cursor = sqlite_connection.cursor()
         print("База данных подключена к SQLite")
         cursor.execute(sqlite_create_table_query)
@@ -66,7 +66,7 @@ def add(table, data: list):
         elif table == "HomeTasks":
             cursor = sqlite_connection.cursor()
             print("База данных подключена к SQLite")
-            cursor.executemany("INSERT INTO HomeTasks VALUES (?,?,?,?)", (data,))
+            cursor.executemany("INSERT INTO HomeTasks VALUES (?,?,?,?,?)", (data,))
             sqlite_connection.commit()
             print("Значения успешно добавленны")
             cursor.close()
@@ -98,14 +98,36 @@ def delete(table, id):
             print("Соединение с SQLite закрыто")
 
 
-def edit(table, id, new_problem, new_ans):
+def edit(table, user, new_password):
     try:
         sqlite_connection = sqlite3.connect('static/data/Server_data.db')
         sqlite_create_table_query = f"""
                                         UPDATE {table}
-                                        SET problem = '{new_problem}',
-                                        ans = '{new_ans}'
-                                        WHERE id = '{id}'
+                                        SET password = '{new_password}',
+                                        WHERE name = '{user}'
+                                        """
+
+        cursor = sqlite_connection.cursor()
+        print("База данных подключена к SQLite")
+        cursor.execute(sqlite_create_table_query)
+        sqlite_connection.commit()
+        print("Значения успешно изменены")
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Ошибка при подключении к sqlite", error)
+    finally:
+        if (sqlite_connection):
+            sqlite_connection.close()
+            print("Соединение с SQLite закрыто")
+def edit_dz(user, new_password):
+    try:
+        sqlite_connection = sqlite3.connect('static/data/Server_data.db')
+        sqlite_create_table_query = f"""
+                                        UPDATE HomeTasks
+                                        SET password = '{new_password}',
+                                        WHERE name = '{user}'
                                         """
 
         cursor = sqlite_connection.cursor()

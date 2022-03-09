@@ -1,0 +1,3 @@
+function not() {
+    document.write('')
+}
