@@ -4,7 +4,7 @@ import datetime
 import static.data.raspisanie as raspi
 
 app = Flask(__name__)
-app.secret_key = '12'
+app.secret_key = '12020112'
 
 database.create_table_HomeTasks()
 database.create_table_accounts()
@@ -22,7 +22,7 @@ def login():
             d = []
             for j in i:
                 d.append(j)
-            d.pop(0)
+            d.pop(2)
             server_data.append(d)
         print(server_data)
         in_data = [login, password]
@@ -47,8 +47,7 @@ def home():
         for i in h:
             subject.append(i[3])
             dz.append(i[2])
-            if i[1] not in date:
-                date.append(i[1])
+            date.append(i[1])
         return render_template('home.html', index=range(len(date)), subject=subject, dz=dz,
                                date=date, index2=range(len(h)), index3=range(6))
     else:
