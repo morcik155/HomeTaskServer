@@ -121,13 +121,17 @@ def edit(table, user, new_password):
         if (sqlite_connection):
             sqlite_connection.close()
             print("Соединение с SQLite закрыто")
-def edit_dz(user, new_password):
+
+
+def edit_dz(id, new_dz, user):
     try:
         sqlite_connection = sqlite3.connect('static/data/Server_data.db')
         sqlite_create_table_query = f"""
                                         UPDATE HomeTasks
-                                        SET password = '{new_password}',
-                                        WHERE name = '{user}'
+                                        SET text = '{new_dz}',
+                                        WHERE id = '{id}',
+                                        SET hwo_reduct = '{user}',
+                                        WHERE id = {id}
                                         """
 
         cursor = sqlite_connection.cursor()

@@ -47,7 +47,8 @@ def home():
         for i in h:
             subject.append(i[3])
             dz.append(i[2])
-            date.append(i[1])
+            if i[1] not in date:
+                date.append(i[1])
         return render_template('home.html', index=range(len(date)), subject=subject, dz=dz,
                                date=date, index2=range(len(h)), index3=range(6))
     else:

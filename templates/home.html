@@ -6,8 +6,6 @@
     <title>Таблица</title>
 </head>
 <body>
-<!--<div style="color: black" id="dz2">{{dz}}</div>-->
-<!--<div style="color: black" id="sub2">{{subject}}</div>-->
 <script src="/static/js/table.js"></script>
 <form action="/edit" target="_blank">
     <button>Внести данные</button>
@@ -17,42 +15,22 @@
 </form>
 <table class="table" border="2">
     <tr>
-        <th>число</th>
         <th>предмет</th>
         <th>домашнее задание</th>
     </tr>
 </table>
 <h6></h6>
-<!--{%for i in index%}-->
-<!--<table class="table" border="1">-->
-<!--    <tr>-->
-<!--        <th>{{date[i]}}</th>-->
-<!--    </tr>-->
-<!--</table>-->
-<!--<table class="table" border="1">-->
-<!--    {%for j in index2%}-->
-<!--    <tr>-->
-<!--        <th id="sub1">{{subject[j]}}</th>-->
-<!--        <th id="dz1">{{dz[j]}}</th>-->
-<!--    </tr>-->
-<!--    <script>-->
-<!--        split_table()-->
-<!--    </script>-->
-<!--    {%endfor%}-->
-<!--</table>-->
-<!--<h4></h4>-->
-<!--{%endfor%}-->
+{%for i in index%}
 <table class="table" border="1">
-    {%for j in index2%}
     <tr>
-        <th>{{date[j]}}</th>
-        <th id="sub1">{{subject[j]}}</th>
-        <th id="dz1">{{dz[j]}}</th>
+        <th>{{date[i]}}</th>
     </tr>
+</table>
+{%endfor%}
+<table class="table" border="1">
     <script>
-        split_table()
+        split_table('{{dz}}', '{{subject}}')
     </script>
-    {%endfor%}
 </table>
 <h4></h4>
 </body>
