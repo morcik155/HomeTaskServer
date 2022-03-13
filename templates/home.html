@@ -20,18 +20,12 @@
     </tr>
 </table>
 <h6></h6>
-{%for i in index%}
 <table class="table" border="1">
-    <tr>
-        <th>{{date[i]}}</th>
-    </tr>
+<script>
+    split_table('{{dz}}', '{{subject}}', '{{date}}')
+</script>
 </table>
-{%endfor%}
-<table class="table" border="1">
-    <script>
-        split_table('{{dz}}', '{{subject}}')
-    </script>
-</table>
+
 <h4></h4>
 </body>
 </html>

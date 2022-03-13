@@ -45,10 +45,13 @@ def home():
         dz = []
         date = []
         for i in h:
-            subject.append(i[3])
-            dz.append(i[2])
             if i[1] not in date:
                 date.append(i[1])
+                subject.append('')
+                dz.append('')
+            subject.append(i[3])
+            dz.append(i[2])
+        date.sort()
         return render_template('home.html', index=range(len(date)), subject=subject, dz=dz,
                                date=date, index2=range(len(h)), index3=range(6))
     else:
@@ -57,7 +60,7 @@ def home():
 
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():
-    d = datetime.date.today().isoweekday()
+    d = datetime.date.today().isoweekday() - 1
     if request.method == 'POST':
         d2 = datetime.date.today()
         d3 = str(d2.day)
@@ -95,10 +98,14 @@ def edit():
             print(data)
             database.add('HomeTasks', data)
         return redirect('/')
-    else:
+    if request.method == 'GET':
         if session.get('is_active'):
             if d != 7:
                 return render_template('edit.html', rasp=raspi.d1[d - 1], index=range(len(raspi.d1[d - 1])))
+            else:
+                return '<h1>СЕГОДНЯ ВОСКРЕВЕНИЕ - ВЫХОДНОЙ!</h1>'
+        else:
+            return redirect('/login')
 
 
 @app.route('/resetpassword')

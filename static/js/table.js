@@ -1,14 +1,17 @@
-function split_table(dz1, sub1) {
+var subls = [];
+var dzls = [];
+var datels = [];
+
+function split_table(dz1, sub1, date) {
     var div = document.createElement('div');
     div.innerHTML = dz1.slice(1, dz1.length - 1);
     dz1 = div.firstChild.nodeValue;
     var div1 = document.createElement('div');
     div1.innerHTML = sub1.slice(1, sub1.length - 1);
     sub1 = div1.firstChild.nodeValue;
-    console.log(dz1)
-    console.log(sub1)
-    var subls = [];
-    var dzls = [];
+    var div2 = document.createElement('div');
+    div2.innerHTML = date.slice(1, date.length - 1)
+    date = div2.firstChild.nodeValue;
     var help = '';
     for (var i = 0; i < dz1.length; i++) {
         if (dz1[i] != ',') {
@@ -20,7 +23,13 @@ function split_table(dz1, sub1) {
             } else {
                 help = help + dz1[i];
             }
-        } else {
+        }
+        if (dz1[i] == ',') {
+            help = help.slice(1, help.length - 1)
+            dzls.push(help)
+            help = '';
+        }
+        if (i == dz1.length - 1) {
             help = help.slice(1, help.length - 1)
             dzls.push(help)
             help = '';
@@ -37,18 +46,52 @@ function split_table(dz1, sub1) {
             } else {
                 help = help + sub1[i];
             }
-        } else {
+        }
+        if (sub1[i] == ',') {
             help = help.slice(1, help.length - 1)
             subls.push(help)
             help = '';
         }
+        if (i == sub1.length - 1) {
+            help = help.slice(1, help.length - 1)
+            subls.push(help)
+        }
+    }
+    help = ''
+    for (i = 0; i < date.length; i++) {
+        if (date[i] != ',') {
+            if (help.length == 0) {
+                if (date[i] == ' ') {
+                } else {
+                    help = help + date[i];
+                }
+            } else {
+                help = help + date[i];
+            }
+        }
+        if (date[i] == ',') {
+            help = help.slice(1, help.length - 1)
+            datels.push(help)
+            help = '';
+        }
+        if (i == date.length - 1) {
+            help = help.slice(1, help.length - 1)
+            datels.push(help)
+        }
     }
     console.log(dzls)
     console.log(subls)
-    for (i = 0; i < dzls.length; i++) {
-        document.write('    <tr>' +
-            '        <th>' + subls[i] + '</th>' +
-            '        <th>' + dzls[i] + '</th>' +
-            '    </tr>')
+    for (i = 0; i < datels.length; i++) {
+        document.write('<table class="table" border="1"><tr><th>' + datels[i] + '</th></tr></table>')
+        document.write('<table class="table" border="1">')
+        for (var j = 0; j < subls.length-1; j++) {
+            if (subls[j] != '') {
+                document.write('<tr><th>' + subls[j] + '</th><th>' + dzls[j] + '</th></tr>')
+            } else {
+                subls = subls.slice(j, subls.length)
+                dzls = dzls.slice(j, dzls.length)
+            }
+        }
+        document.write('</table><h3></h3>')
     }
 }
