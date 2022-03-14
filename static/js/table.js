@@ -79,12 +79,10 @@ function split_table(dz1, sub1, date) {
             datels.push(help)
         }
     }
-    console.log(dzls)
-    console.log(subls)
     for (i = 0; i < datels.length; i++) {
         document.write('<table class="table" border="1"><tr><th>' + datels[i] + '</th></tr></table>')
         document.write('<table class="table" border="1">')
-        for (var j = 0; j < subls.length-1; j++) {
+        for (var j = 0; j < subls.length+datels.length-i-1; j++) {
             if (subls[j] != '') {
                 document.write('<tr><th>' + subls[j] + '</th><th>' + dzls[j] + '</th></tr>')
             } else {
